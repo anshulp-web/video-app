@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
     messages: 'Welcome to backend',
   });
 });
-//Listen app
+//Server started
 app.listen(8800, () => {
   connect();
   console.log(`Connected on http://localhost:8800`);
