@@ -16,6 +16,7 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import FlagOutlinedIcon from '@mui/icons-material/FlagOutlined';
 import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
 import SettingsBrightnessOutlinedIcon from '@mui/icons-material/SettingsBrightnessOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../redux/userSlice';
@@ -26,6 +27,9 @@ const Container = styled.div`
   position: sticky;
   top: 0;
   height: 100vh;
+  @media (max-width: 768px) {
+    display: ${({ responsive }) => (responsive ? 'block' : 'none')};
+  }
 `;
 const Wrapper = styled.div`
   padding: 15px 20px;
@@ -58,6 +62,9 @@ const Hr = styled.hr`
 const Login = styled.div`
   display: flex;
   flex-direction: column;
+  @media (max-width: 768px) {
+    align-items: flex-start;
+  }
 `;
 const Btn = styled.button`
   padding: 8px 20px;
@@ -76,7 +83,21 @@ const Title = styled.p`
   font-size: 13px;
   text-align: center;
 `;
-const Menu = ({ darkMode, setdarkMode }) => {
+const LogoWrapper = styled.div`
+  @media (max-width: 768px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+`;
+const DensityMediumIconBar = styled.div`
+  display: none;
+  @media (max-width: 768px) {
+    display: inline;
+  }
+`;
+const Menu = ({ darkMode, setdarkMode, responsive, setResponsive }) => {
   const { user } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
@@ -86,12 +107,18 @@ const Menu = ({ darkMode, setdarkMode }) => {
   };
   return (
     <>
-      <Container>
+      <Container responsive={responsive}>
         <Wrapper>
           <Logo>
             <Img src={logoImg} />
-            Video-app
+            <LogoWrapper>
+              <div> Video-app</div>
+              <DensityMediumIconBar>
+                <CloseIcon onClick={() => setResponsive(false)} />
+              </DensityMediumIconBar>
+            </LogoWrapper>
           </Logo>
+
           <Link to="/">
             <Item>
               <HomeIcon />

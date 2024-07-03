@@ -19,19 +19,27 @@ const Container = styled.div`
 `;
 const Main = styled.div`
   flex: 7;
+  display: ${({ responsive }) => (responsive ? 'none' : 'block')};
 `;
+
 const Wrapper = styled.div``;
 function App() {
   const [darkMode, setdarkMode] = useState(true);
+  const [responsive, setResponsive] = useState('');
   return (
     <>
       <ThemeProvider theme={darkMode ? darkTheme : lighTheme}>
         <Container>
           <Toaster />
           <BrowserRouter>
-            <Menu darkMode={darkMode} setdarkMode={setdarkMode} />
-            <Main>
-              <Navbar />
+            <Menu
+              darkMode={darkMode}
+              setdarkMode={setdarkMode}
+              responsive={responsive}
+              setResponsive={setResponsive}
+            />
+            <Main responsive={responsive}>
+              <Navbar responsive={responsive} setResponsive={setResponsive} />
               <Wrapper>
                 <Routes>
                   <Route path="/" element={<Home type="random" />} />

@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import VideoCallOutlinedIcon from '@mui/icons-material/VideoCallOutlined';
+import DensityMediumIcon from '@mui/icons-material/DensityMedium';
 import { Link, useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Upload from './Upload';
@@ -35,6 +36,10 @@ const Search = styled.div`
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 18px;
+  @media (max-width: 768px) {
+    position: relative;
+    width: 58%;
+  }
 `;
 
 const Input = styled.input`
@@ -56,6 +61,9 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   gap: 5px;
+  @media (max-width: 768px) {
+    padding: 5px 10px;
+  }
 `;
 const User = styled.div`
   display: flex;
@@ -70,7 +78,13 @@ const Avatar = styled.img`
   border-radius: 50%;
   background-color: #999;
 `;
-const Navbar = () => {
+const DensityMediumIconBar = styled.div`
+  display: none;
+  @media (max-width: 768px) {
+    display: inline;
+  }
+`;
+const Navbar = ({ responsive, setResponsive }) => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [q, setQ] = useState('');
@@ -84,6 +98,13 @@ const Navbar = () => {
     <>
       <Container>
         <Wrapper>
+          <DensityMediumIconBar>
+            <DensityMediumIcon
+              style={{ cursor: 'pointer' }}
+              onClick={() => setResponsive(true)}
+            />
+          </DensityMediumIconBar>
+
           <Search>
             <Input placeholder="Search" value={q} onChange={handleSearch} />
             <SearchOutlinedIcon
